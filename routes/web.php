@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[PageController::class,'index']); 
 
+// metodo per importare tutte le rotte
 Route::resource('comics', ComicController::class);
