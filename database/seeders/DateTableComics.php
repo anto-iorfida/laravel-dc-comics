@@ -22,7 +22,7 @@ class DateTableComics extends Seeder
 
             $newPasta = new Comic();
             $newPasta->title = $comicItem['title'];
-            $newPasta->descriptio = $comicItem['description'];
+            $newPasta->description = $comicItem['description'];
             $newPasta->thumb = $comicItem['thumb'];
             $newPasta->price = $comicItem['price'];
             $newPasta->series = $comicItem['series'];
