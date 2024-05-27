@@ -24,10 +24,10 @@
                                 <a href="{{ route('comics.edit', ['comic' => $comicItem->id]) }}" class="btn btn-primary">modifica</a>
 
                                 <div class="py-1">
-                                    <form action="{{ route('comics.destroy', ['comic' => $comicItem->id]) }}" method="POST">
+                                    <form id="delete-form-{{ $comicItem->id }}" action="{{ route('comics.destroy', ['comic' => $comicItem->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger js-delete-btn"  type="submit">Elimina</button>
+                                        <button class="btn btn-danger js-delete-btn" data-comic-title="{{ $comicItem->title }}"  type="button">Elimina</button>
                                     </form>
                                 </div>
                             </div>
@@ -48,3 +48,28 @@
         }
     </style>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.js-delete-btn');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                // ottenere il modulo più vicino al bottone cliccato
+                const form = button.closest('form');
+
+                // ottenere il titolo del fumetto dall'attributo data-comic-title
+                const comicTitle = button.getAttribute('data-comic-title');
+                
+                // mostrare il popup di conferma
+                const confirmed = confirm(`Sei sicuro di voler eliminare "${comicTitle}"?`);
+
+                // se l'utente conferma, invia il modulo
+                // altrimenti, non fare nulla (azione di eliminazione annullata)
+                if (confirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
