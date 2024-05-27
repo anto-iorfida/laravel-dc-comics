@@ -23,7 +23,7 @@ class DateTableComics extends Seeder
             $newPasta = new Comic();
             $newPasta->title = $comicItem['title'];
             $newPasta->description = $comicItem['description'];
-            $newPasta->thumb = $comicItem['thumb'];
+            $newPasta->thumb = 'https://picsum.photos/200';
             $newPasta->price = $comicItem['price'];
             $newPasta->series = $comicItem['series'];
             $newPasta->sale_date = $comicItem['sale_date'];
@@ -32,6 +32,17 @@ class DateTableComics extends Seeder
 
         }
 
-
+         // Aggiorna il campo 'thumb' per tutti i record nel database
+        $this->updateThumbForAllComics();
+    }
+     /**
+     * Update the thumb field for all comics.
+     *
+     * @return void
+     */
+    public function updateThumbForAllComics()
+    {
+        // Esegui un aggiornamento di massa per cambiare il campo 'thumb' di tutti i record
+        Comic::query()->update(['thumb' => 'https://picsum.photos/200']);
     }
 }
